@@ -1,7 +1,7 @@
 ---
 title: "Steps to update .NET Core app from v2.1 to v2.2"
 date: 2018-12-10
-tags: ["dotnet","VS Code"]
+tags: ["dotnet","vs code"]
 topics: ["net core"]
 ---
 
@@ -17,15 +17,16 @@ Here are the steps I took to update a recent project:
   ```      
   </li>
   <li>
-  Run the command line ```dotnet list package --outdated``` to find what packages might need to be updated.  With certain packages, you're required to update them or the project won't compiled (ie dotnet build).
-  In my case, I had to update two packages from version 2.1.0 to 2.2.0:
+  Run the command line `dotnet list package --outdated` to find which packages might need to be updated.  With certain packages, you're required to update them or the project won't compiled (ie `dotnet build`).
+  ~~In my case, I had to update two packages from version 2.1.0 to 2.2.0~~:
   ```
   <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.0" />
   <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
   ```
+  *Update 12/11/2018:  I didn't even need to include, and therefore update, those two packages since they are included in the Microsoft.AspNetCore.App package.*
   </li>
   <li>
-  Run the command line ```dotnet build```.  This command will implicitly run the command ```dotnet restore```, which does the actual work of updating the packages, and then it will compile the application.
+  Run the command line `dotnet build`.  This command will implicitly run the command `dotnet restore`, which does the actual work of updating the packages, and then it will compile the application.
   </li>
   <li>
   Update the correct path to the project's dll in the .vscode\launch.json file.  Since I used Visual Studio Code as my editor, I updated the path to make sure debugging continue to work correctly:  
@@ -34,3 +35,9 @@ Here are the steps I took to update a recent project:
   ```
   </li>
 </ol>    
+
+
+
+References:  
+https://docs.microsoft.com/en-us/aspnet/core/migration/20_21?view=aspnetcore-2.1  
+https://docs.microsoft.com/en-us/aspnet/core/fundamentals/metapackage-app?view=aspnetcore-2.2#update-aspnet-core 
